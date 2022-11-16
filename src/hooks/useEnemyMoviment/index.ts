@@ -1,7 +1,7 @@
-import useInterval from '@use-it/interval';
-import React from 'react';
-import { handleNextMoviment } from '../../contexts/canvas/helpers';
-import { EDirection } from '../../settings/constants';
+import useInterval from "@use-it/interval";
+import React from "react";
+import { handleNextPosition } from "../../contexts/canvas/helpers";
+import { EDirection } from "../../settings/constants";
 
 function useEnemyMoviment(initialPosition) {
   const [positionState, updatePositionState] = React.useState(initialPosition);
@@ -10,15 +10,18 @@ function useEnemyMoviment(initialPosition) {
   useInterval(function move() {
     var random = Math.floor(Math.random() * 4);
     var directionArray = Object.values(EDirection);
-    const randomDirection = directionArray [random];
+    const randomDirection = directionArray[random];
 
-    handleNextMoviment(randomDirection, positionState)
+    const nextMoviment = handleNextPosition(randomDirection, positionState);
+
+    updateDirectionState(randomDirection);
+    updatePositionState(nextMoviment);
   }, 2000);
 
   return {
     position: positionState,
     direction: direction,
-  }
+  };
 }
 
 export default useEnemyMoviment;
