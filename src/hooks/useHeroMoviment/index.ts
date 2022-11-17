@@ -8,7 +8,11 @@ function useHeroMoviment(initialPosition) {
   const [direction, updateDirectionState] = React.useState(EDirection.RIGHT);
 
   useEventListener("keydown", (event: { key: any }) => {
-   const direction = event.key;
+   const direction = event.key as EDirection;
+
+   if(direction.indexOf('Arrow') === -1) {
+    return;
+   }
 
    const nextPosition = handleNextPosition(direction, positionState);
    updatePositionState(nextPosition);
