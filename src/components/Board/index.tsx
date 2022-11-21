@@ -5,17 +5,45 @@ import Demon from '../Demon';
 import Hero from '../Hero';
 import MiniDemon from '../MiniDemon';
 import Trap from '../Trap';
+import { canvas, ECanvas } from '../../contexts/canvas/helpers';
 
+function getCanvasMap() {
+  const array = [];
+
+  for (let y = 0; y < canvas.length; y++) {
+    const canvasY = canvas[y];
+
+    for (let x = 0; x < canvasY.length; x++) {
+      const canvasYX = canvasY[x];
+
+      const position = { x: x, y: y };
+      const text = canvas[y][x] || canvasYX;
+      const key = `${x}-${y}`;
+
+      if (text === ECanvas.HERO) {
+        array.push(<Hero key={key} initialPosition={position} />)
+      }
+
+      // array.push(<Tile key={key} position={position} text={text} />)
+    }
+  }
+
+  return array;
+}
+
+const elements = getCanvasMap();
 const Board = () => {
   return (
     <div>
-      <MiniDemon initialPosition={{ x: 10, y: 8}} />
+      {/*<MiniDemon initialPosition={{ x: 10, y: 8}} />
       <MiniDemon initialPosition={{ x: 10, y: 10 }} />
 
       <Demon />
       <Hero />      
       <Chest />      
-      <Trap />      
+      <Trap /> */} 
+
+      {elements}     
       <img src="./assets/tileset.gif" alt="" width={GAME_SIZE} height={GAME_SIZE} />
     </div>
   );
