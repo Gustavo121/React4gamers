@@ -1,20 +1,22 @@
-import React from 'react';
-import { GAME_SIZE } from '../settings/constants';
-import './App.css';
+import React from "react";
+import { GAME_SIZE } from "../settings/constants";
+import "./App.css";
 
-import Board from './Board';
+import Board from "./Board";
+import Debugger from "./Debugger";
 
 function App() {
   return (
     <div className="App">
-      <div 
+      <div
         style={{
-          position: 'relative',
+          position: "relative",
           width: GAME_SIZE,
           height: GAME_SIZE,
         }}
       >
-        <Board/>
+        <Debugger />
+        <Board />
       </div>
     </div>
   );

@@ -9,19 +9,17 @@ const moviment = {
 };
 
 interface IProps {
-  position: { x: number; y: number }
+  initialPosition: { x: number; y: number }
 }
 
 const MiniDemon = (props: IProps) => {
-
-  console.log('position', props.position);
-  // const moviment = useEnemyMoviment({ x: 10, y: 5 });
+  const moviment = useEnemyMoviment(props.initialPosition);
 
   return (
     <div
       style={{
           position: 'absolute',
-          bottom: TILE_SIZE * moviment.position.y,
+          top: TILE_SIZE * moviment.position.y,
           left: TILE_SIZE * moviment.position.x,
           width: TILE_SIZE,
           height: TILE_SIZE + HEAD_OFFSET,
