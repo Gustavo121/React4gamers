@@ -17,6 +17,19 @@ function Tile(props: IProps) {
         case ECanvas.WALL:
           return 'yellow';
 
+        case ECanvas.DOOR:
+          return 'white';
+
+        case ECanvas.TRAP:
+          return 'chartreuse'
+
+        case ECanvas.MINI_DEMON:
+        case ECanvas.DEMON:
+          return 'red';
+
+        case ECanvas.CHEST:
+          return 'cyan';
+
         case ECanvas.HERO:
           return 'magenta';
     }
@@ -34,6 +47,7 @@ function Tile(props: IProps) {
     border: `2px solid ${color}`,
     color: color,
     fontSize: 32,
+    zIndex: 2,
     }}>
       {props.text}
     </div>

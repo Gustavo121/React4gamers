@@ -3,8 +3,12 @@ import useEnemyMoviment from '../../hooks/useEnemyMoviment';
 import { DEMON_TILE_SIZE, EDirection, TILE_SIZE } from '../../settings/constants';
 import './index.css'
 
-const Demon = () => {
-  const moviment = useEnemyMoviment({ x: 5, y: 5 })
+interface IProps {
+  initialPosition: { x: number; y: number }
+}
+
+const Demon = (props: IProps) => {
+  const moviment = useEnemyMoviment(props.initialPosition)
   
   return (
     <div
