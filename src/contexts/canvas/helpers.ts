@@ -1,4 +1,5 @@
 import { EDirection } from "../../settings/constants";
+import React from "react";
 
 export function handleNextPosition(direction, position) {
     switch(direction) {
@@ -58,3 +59,21 @@ export const canvas = [
     [WL, FL, FL, FL, FL, FL, FL, FL, FL, FL, FL, FL, FL, FL, FL, FL, FL, FL, FL, WL],
     [WL, WL, WL, WL, WL, WL, WL, WL, WL, WL, WL, WL, WL, WL, WL, WL, WL, WL, WL, WL],
 ];
+
+export function checkValidMoviment(nextPosition) {
+const canvasValue = canvas[nextPosition.y][nextPosition.x];
+
+  if (canvasValue === ECanvas.WALL) {
+    return false;
+  }
+
+  if(canvasValue === ECanvas.CHEST) {
+    console.log('PISOU NO BAU')
+  }
+
+  if(canvasValue === ECanvas.TRAP) {
+    console.log('PISOU NO TRAP')
+  }
+
+  return true;
+}
