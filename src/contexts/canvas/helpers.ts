@@ -1,4 +1,4 @@
-import { EDirection } from "../../settings/constants";
+import { EDirection, EWalker } from "../../settings/constants";
 import React from "react";
 
 export function handleNextPosition(direction, position) {
@@ -60,20 +60,42 @@ export const canvas = [
     [WL, WL, WL, WL, WL, WL, WL, WL, WL, WL, WL, WL, WL, WL, WL, WL, WL, WL, WL, WL],
 ];
 
-export function checkValidMoviment(nextPosition) {
+export function checkValidMoviment(nextPosition, walker) {
 const canvasValue = canvas[nextPosition.y][nextPosition.x];
+
+  const result = walker === EWalker.HERO 
+    ? getHeroValidMoves(canvasValue) 
+    : getEnemyValidMoves(canvasValue);
 
   if (canvasValue === ECanvas.WALL) {
     return false;
   }
 
-  if(canvasValue === ECanvas.CHEST) {
+  if (canvasValue === ECanvas.CHEST) {
     console.log('PISOU NO BAU')
   }
 
-  if(canvasValue === ECanvas.TRAP) {
+  if (canvasValue === ECanvas.TRAP) {
     console.log('PISOU NO TRAP')
   }
 
   return true;
+}
+
+function getHeroValidMoves(canvasValue) {
+  return {
+    valid: canvasValue === ECanvas.FLOOR || canvasValue === ECanvas.CHEST || canvasValue === ECanvas.TRAP || canvasValue === ECanvas.MINI_DEMON || canvasValue === ECanvas.DEMON,
+    dead: canvasValue === ECanvas.TRAP || canvasValue === ECanvas.MINI_DEMON || canvasValue === ECanvas.DEMON,
+    chest: canvasValue === ECanvas.CHEST,
+    door: canvasValue === ECanvas.DOOR,
+  }
+}
+
+function getEnemyValidMoves(canvasValue) {
+  return {
+    valid: canvasValue === ECanvas.FLOOR || canvasValue === ECanvas.HERO,
+    dead: false,
+    chest: false,
+    door: false,
+  }
 }

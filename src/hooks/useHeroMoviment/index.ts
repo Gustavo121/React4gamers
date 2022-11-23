@@ -1,7 +1,7 @@
 import useEventListener from '@use-it/event-listener';
 import React from 'react';
 import { checkValidMoviment, handleNextPosition } from '../../contexts/canvas/helpers';
-import { EDirection } from '../../settings/constants';
+import { EDirection, EWalker } from '../../settings/constants';
 
 function useHeroMoviment(initialPosition) {
   const [positionState, updatePositionState] = React.useState(initialPosition);
@@ -15,7 +15,7 @@ function useHeroMoviment(initialPosition) {
    }
 
    const nextPosition = handleNextPosition(direction, positionState);
-   const isValidMoviment = checkValidMoviment(nextPosition);
+   const isValidMoviment = checkValidMoviment(nextPosition, EWalker.HERO);
    
    if (isValidMoviment) {
     updatePositionState(nextPosition);
