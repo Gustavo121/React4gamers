@@ -13,9 +13,9 @@ function useEnemyMoviment(initialPosition) {
     const randomDirection = directionArray[random];
 
     const nextPosition = handleNextPosition(randomDirection, positionState);
-    const isValidMoviment = checkValidMoviment(nextPosition, EWalker.ENEMY);
+    const nextMove = checkValidMoviment(nextPosition, EWalker.ENEMY);
 
-    if (isValidMoviment) {
+    if (nextMove.valid) {
       updateDirectionState(randomDirection);
       updatePositionState(nextPosition);
     }    

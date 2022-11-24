@@ -66,20 +66,7 @@ const canvasValue = canvas[nextPosition.y][nextPosition.x];
   const result = walker === EWalker.HERO 
     ? getHeroValidMoves(canvasValue) 
     : getEnemyValidMoves(canvasValue);
-
-  if (canvasValue === ECanvas.WALL) {
-    return false;
-  }
-
-  if (canvasValue === ECanvas.CHEST) {
-    console.log('PISOU NO BAU')
-  }
-
-  if (canvasValue === ECanvas.TRAP) {
-    console.log('PISOU NO TRAP')
-  }
-
-  return true;
+    return result;
 }
 
 function getHeroValidMoves(canvasValue) {
