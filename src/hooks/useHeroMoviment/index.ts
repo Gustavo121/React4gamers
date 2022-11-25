@@ -1,9 +1,10 @@
 import useEventListener from '@use-it/event-listener';
 import React from 'react';
-import { checkValidMoviment, handleNextPosition } from '../../contexts/canvas/helpers';
+import { CanvasContext } from '../../contexts/canvas';
 import { EDirection, EWalker } from '../../settings/constants';
 
 function useHeroMoviment(initialPosition) {
+  const canvasContext = React.useContext(CanvasContext);
   const [positionState, updatePositionState] = React.useState(initialPosition);
   const [direction, updateDirectionState] = React.useState(EDirection.RIGHT);
 
@@ -13,16 +14,15 @@ function useHeroMoviment(initialPosition) {
    if(direction.indexOf('Arrow') === -1) {
     return;
    }
-
-   const nextPosition = handleNextPosition(direction, positionState);
-   const nextMove = checkValidMoviment(nextPosition, EWalker.HERO);
    
-   if (nextMove.valid) {
-    updatePositionState(nextPosition);
+   const moviment = canvasContext.updateCanvas(direction, positionState, EWalker.HERO);
+   
+   if (moviment.nextMove.valid) {
+    updatePositionState(moviment.nextPosition);
     updateDirectionState(direction);
-   }  
+   }
    
-   if (nextMove.dead) {
+   if (moviment.nextMove.dead) {
     console.log('Você morreu!');
    }
   });  

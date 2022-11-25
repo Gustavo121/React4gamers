@@ -1,16 +1,28 @@
 import React from "react";
-import { canvas } from "./helpers";
+import { EWalker } from "../../settings/constants";
+import { canvas, checkValidMoviment, handleNextPosition } from "./helpers";
+
+interface IProps {
+    children: React.ReactNode;
+}
 
 export const CanvasContext = React.createContext({
   canvas: [],
-  updadeCanvas: () => null
+  updateCanvas: (direction, position, walker) => null
 });
 
-function CanvasProvider() {
+function CanvasProvider(props: IProps) {
   const [canvasState, updateCanvasState] = React.useState({
    canvas: canvas,
-   updateCanvas: () => {
-    console.log('updateCanvas');
+   updateCanvas: (direction, position, walker) => {
+    const nextPosition = handleNextPosition(direction, position);
+    const nextMove = checkValidMoviment(nextPosition, walker);
+
+    console.log('Hello, updateCanvas');
+    return {
+        nextPosition,
+        nextMove,
+    }
    }   
   }); 
 
@@ -20,3 +32,5 @@ function CanvasProvider() {
     </CanvasContext.Provider>
   )
 }
+
+export default CanvasProvider;
